@@ -28,12 +28,17 @@ app.get('*', (req, res) => {
   }
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log('');
-  console.log('  🛒 FreshCart Grocery App');
-  console.log('  ========================');
-  console.log(`  ✅ Server running at: http://localhost:${PORT}`);
-  console.log(`  📦 API available at:  http://localhost:${PORT}/api`);
-  console.log('');
-});
+// Export for Vercel serverless
+module.exports = app;
+
+// Start server only when run directly (local dev)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log('');
+    console.log('  🛒 FreshCart Grocery App');
+    console.log('  ========================');
+    console.log(`  ✅ Server running at: http://localhost:${PORT}`);
+    console.log(`  📦 API available at:  http://localhost:${PORT}/api`);
+    console.log('');
+  });
+}
